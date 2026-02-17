@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Kauã Alves | Soluções Digitais</title>
+    
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%230284c7"/><text x="50" y="50" dy=".35em" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="70" fill="white">K</text></svg>'>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        :root {
+            /* Cores */
+            --primary: #0284c7;       
+            --primary-hover: #0369a1;
+            --accent: #38bdf8;        
+            --dark: #0f172a;          
+            --text-body: #475569;     
+            --bg-body: #f8fafc;
+            --white: #ffffff;
+            
+            /* UI */
+            --radius-xl: 32px;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            
+            /* Efeitos */
+            --shadow-card: 0 10px 40px -10px rgba(2, 132, 199, 0.08);
+            --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Fixes Globais */
+        div:where(.swal2-container) { z-index: 99999 !important; }
+        .modal-overlay { z-index: 9999 !important; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Plus Jakarta Sans', sans-serif; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { background-color: var(--bg-body); color: var(--dark); overflow-x: hidden; padding-bottom: 120px; }
+
+        /* --- DOCK MENU (DESKTOP) --- */
+        .nav-dock {
+            position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(20px);
+            padding: 0.8rem 2.5rem; border-radius: 100px;
+            display: flex; gap: 2rem; align-items: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            z-index: 1000; border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        .nav-group { display: flex; align-items: center; gap: 2rem; }
+        
+        /* Grupo de Links (Desktop) */
+        .nav-links-group { display: flex; gap: 2rem; }
+
+        .nav-divider { width: 1px; height: 24px; background: rgba(255,255,255,0.2); }
+        
+        .nav-item {
+            color: rgba(255,255,255,0.6); text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: all 0.4s var(--ease-elastic); cursor: pointer;
+        }
+        .nav-item.active { color: var(--accent); }
+        .nav-item.active span { transform: scale(1.15); font-weight: 800; text-shadow: 0 0 20px rgba(56, 189, 248, 0.5); }
+        
+        .nav-icon { display: none; margin-bottom: 4px; }
+        .nav-text { display: block; }
+        .nav-social-group { display: flex; gap: 1rem; }
+
+        .nav-social { font-size: 1.2rem; color: rgba(255,255,255,0.8); transition: 0.3s; display: flex; }
+        .nav-social:hover { color: white; transform: translateY(-3px); }
+
+        /* --- HERO --- */
+        .hero { 
+            min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; 
+            padding: 100px 2rem 50px; background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.1) 0%, transparent 60%);
+        }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem; color: var(--dark); font-weight: 800; }
+        .hero h1 span { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.25rem; color: var(--text-body); max-width: 650px; margin: 0 auto 2.5rem; }
+
+        /* --- BOTÕES --- */
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 1rem 2.2rem; border-radius: 16px; font-weight: 700; text-decoration: none; transition: all 0.3s var(--ease-elastic); border: none; cursor: pointer; font-size: 1rem; }
+        .btn:active { transform: scale(0.95); }
+        .btn-primary { background: var(--dark); color: white; box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.3); }
+        .btn-primary:hover { transform: translateY(-5px); background: #1e293b; }
+        .btn-glass { background: white; border: 1px solid var(--primary); color: var(--primary); }
+        .btn-glass:hover { background: rgba(2, 132, 199, 0.05); transform: translateY(-5px); }
+        .btn-outline { border: 2px solid #e2e8f0; background: transparent; color: var(--text-body); }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+        .btn-full { width: 100%; }
+
+        /* --- LAYOUT --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .section-padding { padding: 6rem 0; }
+        .section-title { text-align: center; margin-bottom: 4rem; font-size: 2.2rem; font-weight: 800; color: var(--dark); }
+
+        /* --- CARDS SOLUÇÕES --- */
+        .services-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 768px) { .services-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; } }
+        .service-card { 
+            background: white; padding: 3rem; border-radius: var(--radius-xl); border: 1px solid rgba(0,0,0,0.05); 
+            position: relative; overflow: hidden; transition: all 0.4s ease; 
+            display: flex; flex-direction: column; height: 100%;
+        }
+        .service-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-card); border-color: rgba(2, 132, 199, 0.2); }
+        .service-icon { width: 70px; height: 70px; background: #f0f9ff; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: var(--primary); margin-bottom: 2rem; }
+        .service-card h3 { font-size: 1.6rem; margin-bottom: 1rem; font-weight: 800; }
+        .service-card p { color: var(--text-body); line-height: 1.6; margin-bottom: 2.5rem; flex: 1; }
+        .service-card .btn { margin-top: auto; }
+
+        /* --- CASES --- */
+        .projects-wrapper { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+        .project-card { background: white; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid rgba(0,0,0,0.05); display: flex; flex-direction: column; transition: 0.3s; height: 100%; }
+        .project-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-card); }
+        .project-img { height: 280px; width: 100%; object-fit: cover; }
+        .project-content { padding: 2.5rem; flex: 1; display: flex; flex-direction: column; }
+        .project-category { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
+        .project-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.8rem; }
+        .project-desc { color: var(--text-body); margin-bottom: 2rem; flex: 1; }
+        .swipe-hint { display: none; text-align: center; margin-top: 1rem; color: #94a3b8; font-size: 0.9rem; }
+
+        /* --- PROCESSO --- */
+        .process-bg { background: #f0f9ff; border-radius: 40px; margin: 2rem auto; width: 100%; }
+        .process-steps { display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap; text-align: center; padding: 3rem 1.5rem; }
+        .step-item { flex: 1; min-width: 250px; max-width: 300px; padding: 1rem; position: relative; }
+        .step-number { font-size: 4rem; font-weight: 900; color: rgba(2, 132, 199, 0.15); line-height: 1; margin-bottom: -1.5rem; position: relative; z-index: 0; }
+        .step-content { position: relative; z-index: 1; }
+        .step-content h4 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark); }
+        .step-content p { color: var(--text-body); font-size: 1rem; line-height: 1.5; }
+
+        /* --- FAQ --- */
+        .faq-grid { max-width: 800px; margin: 0 auto; display: grid; gap: 1rem; }
+        .faq-item { background: white; border-radius: 16px; padding: 1.5rem; border: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; }
+        .faq-item:hover { border-color: var(--primary); }
+        .faq-answer { display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; color: var(--text-body); }
+        .faq-item.active .faq-answer { display: block; animation: slideDown 0.3s ease; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Whatsapp Float */
+        .whatsapp-float { position: fixed; bottom: 100px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); z-index: 900; transition: transform 0.3s var(--ease-elastic); }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* --- MODAL WIZARD --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
+        .modal-overlay.active { opacity: 1; }
+        .wizard-box { background: white; width: 95%; max-width: 750px; border-radius: 32px; max-height: 90vh; overflow-y: auto; transform: translateY(30px); transition: 0.4s var(--ease-elastic); display: flex; flex-direction: column; box-shadow: var(--shadow-modal); }
+        .modal-overlay.active .wizard-box { transform: translateY(0); }
+        .wizard-header { padding: 2rem 3rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .progress-indicator { display: flex; gap: 8px; }
+        .progress-dot { width: 10px; height: 10px; border-radius: 50%; background: #e2e8f0; transition: 0.3s; }
+        .progress-dot.active { background: var(--primary); transform: scale(1.3); }
+        .close-btn { cursor: pointer; color: var(--text-body); transition: 0.3s; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #f8fafc; }
+        .close-btn:hover { background: #fee2e2; color: #ef4444; transform: rotate(90deg); }
+        .wizard-body { padding: 1rem 3rem 3rem; flex: 1; text-align: center; }
+        .step-icon-wrapper { width: 90px; height: 90px; background: #f0f9ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); margin: 0 auto 1.5rem; }
+        .step-title { font-size: 2rem; font-weight: 800; margin-bottom: 0.8rem; color: var(--dark); letter-spacing: -0.02em; }
+        .step-subtitle { color: var(--text-body); margin-bottom: 2.5rem; font-size: 1.1rem; max-width: 400px; margin-left: auto; margin-right: auto; }
+        .options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; text-align: left; }
+        @media(min-width: 600px) { .options-grid { grid-template-columns: repeat(4, 1fr); } }
+        .option-card { border: 2px solid var(--border); border-radius: 20px; padding: 1.5rem 1rem; cursor: pointer; transition: 0.3s; background: white; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .option-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .option-card.selected { border-color: var(--primary); background: #f0f9ff; color: var(--primary); }
+        .option-card span { font-size: 0.9rem; font-weight: 700; }
+        #otherInputContainer { animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .form-input { width: 100%; padding: 1.2rem 1.5rem; border: 2px solid var(--border); border-radius: 16px; font-size: 1.1rem; margin-bottom: 1.2rem; outline: none; transition: 0.3s; }
+        .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1); }
+        .summary-card { background: #f8fafc; border: 1px solid var(--border); border-radius: 24px; padding: 2.5rem; text-align: left; margin-bottom: 2.5rem; }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 1.05rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.8rem; }
+        .summary-row:last-child { border: none; margin: 0; padding: 0; }
+        .summary-row strong { color: var(--dark); }
+        .summary-row span { color: var(--primary); font-weight: 700; }
+
+        /* --- MOBILE MENU FIX (DISTRIBUIÇÃO TOTAL) --- */
+        @media (max-width: 768px) {
+            .nav-dock { 
+                width: 95%; max-width: 450px; /* Largura maior para caber tudo */
+                bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+                border-radius: 100px; padding: 0.8rem 1.5rem; 
+                background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255,255,255,0.1);
+                /* Ajuste principal */
+                display: flex; align-items: center; justify-content: space-between; 
+            }
+            
+            /* Remove gap padrão */
+            .nav-group { gap: 0; }
+
+            /* Grupo de Links: Ocupa o máximo possível */
+            .nav-links-group { 
+                display: flex; gap: 0; flex: 1; 
+                justify-content: space-between; /* Distribui links igualmente */
+                margin-right: 1.5rem; /* Espaço para a divisória */
+            }
+            
+            /* Divisória: Agora visível e menor */
+            .nav-divider { display: block; height: 20px; background: rgba(255,255,255,0.15); margin-right: 1rem; }
+            
+            /* Redes Sociais: Visíveis */
+            .nav-social-group { display: flex; gap: 1rem; }
+            
+            /* Ícones Mobile */
+            .nav-icon { display: block !important; font-size: 1.2rem; margin-bottom: 2px; }
+            .nav-text { font-size: 0.6rem; transform: none !important; font-weight: 500; letter-spacing: -0.3px; }
+            
+            /* Ajuste de cor */
+            .nav-item { color: rgba(255,255,255,0.5); }
+            .nav-item.active { color: var(--accent); }
+            .nav-social { font-size: 1.2rem; color: rgba(255,255,255,0.7); }
+
+            .projects-wrapper { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 1rem; padding-bottom: 2rem; grid-template-columns: none; margin-right: -1.5rem; padding-right: 1.5rem; }
+            .project-card { min-width: 85vw; scroll-snap-align: center; }
+            .swipe-hint { display: block; }
+            .whatsapp-float { bottom: 90px; right: 20px; }
+            .wizard-box { width: 100%; height: 100%; max-height: 100vh; border-radius: 0; transform: none; }
+            .wizard-header { padding: 1.5rem; }
+            .wizard-body { padding: 1.5rem; }
+            .step-title { font-size: 1.6rem; }
+            .options-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-dock">
+        
+        <div class="nav-links-group">
+            <a href="#inicio" class="nav-item active" data-target="inicio">
+                <i data-lucide="home" class="nav-icon"></i><span class="nav-text">Início</span>
+            </a>
+            <a href="#solucoes" class="nav-item" data-target="solucoes">
+                <i data-lucide="zap" class="nav-icon"></i><span class="nav-text">Soluções</span>
+            </a>
+            <a href="#cases" class="nav-item" data-target="cases">
+                <i data-lucide="folder-open" class="nav-icon"></i><span class="nav-text">Projetos</span>
+            </a>
+            <a href="#sobre" class="nav-item" data-target="sobre">
+                <i data-lucide="user" class="nav-icon"></i><span class="nav-text">Sobre</span>
+            </a>
+        </div>
+
+        <div class="nav-divider"></div>
+
+        <div class="nav-social-group">
+            <a href="https://github.com/KauaAlvs" target="_blank" class="nav-social"><i data-lucide="github"></i></a>
+            <a href="https://linkedin.com/in/kaua-alves-silva" target="_blank" class="nav-social"><i data-lucide="linkedin"></i></a>
+        </div>
+
+    </nav>
+
+    <section id="inicio" class="hero">
+        <div style="background: rgba(2, 132, 199, 0.1); color: var(--primary); padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 700; font-size: 0.85rem; margin-bottom: 1.5rem; text-transform: uppercase;">
+            Disponível para Projetos
+        </div>
+        <h1>Tecnologia que <br><span>Impulsiona Negócios.</span></h1>
+        <p>Especialista em criar ecossistemas digitais. Do site institucional ao sistema de gestão, eu construo a ferramenta certa para sua empresa crescer.</p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+            <button onclick="openWizard()" class="btn btn-primary">Iniciar Projeto</button>
+            <a href="#cases" class="btn btn-glass">Ver Cases de Sucesso</a>
+        </div>
+    </section>
+
+    <section id="solucoes" class="section-padding container">
+        <div class="section-title">Soluções Sob Medida</div>
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-right">
+                <div class="service-icon"><i data-lucide="globe" size="32"></i></div>
+                <h3>Presença Digital (Sites)</h3>
+                <p>Sites modernos que carregam rápido, aparecem no Google e transformam visitantes em clientes.</p>
+                <button onclick="openWizard('site')" class="btn btn-primary btn-full">Quero um Site</button>
+            </div>
+            <div class="service-card" data-aos="fade-left">
+                <div class="service-icon"><i data-lucide="database" size="32"></i></div>
+                <h3>Sistemas de Gestão</h3>
+                <p>Ferramentas internas para organizar sua empresa. Controle financeiro, intranet e automação.</p>
+                <button onclick="openWizard('sistema')" class="btn btn-primary btn-full">Quero um Sistema</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="cases" class="section-padding container">
+        <div class="section-title">Cases de Sucesso</div>
+        <div class="projects-wrapper">
+            <div class="project-card" data-aos="fade-up">
+                <img src="https://placehold.co/600x400/0284c7/FFF?text=Papa+Mike+CRM" class="project-img">
+                <div class="project-content">
+                    <span class="project-category">Gestão</span>
+                    <h3 class="project-title">Ecossistema Papa Mike</h3>
+                    <p class="project-desc">Sistema completo que unificou o Marketing, Vendas e Financeiro da escola.</p>
+                    <a href="https://papamike.com.br" target="_blank" class="btn btn-outline btn-full">Ver Resultado</a>
+                </div>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://placehold.co/600x400/38bdf8/FFF?text=Portal+APIT" class="project-img">
+                <div class="project-content">
+                    <span class="project-category">Web</span>
+                    <h3 class="project-title">APIT Jovem Aprendiz</h3>
+                    <p class="project-desc">Portal de empregabilidade para gestão de vagas e currículos.</p>
+                    <a href="https://apitaprendiz.org.br" target="_blank" class="btn btn-outline btn-full">Ver Resultado</a>
+                </div>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://placehold.co/600x400/10b981/FFF?text=Saúde+Web" class="project-img">
+                <div class="project-content">
+                    <span class="project-category">Institucional</span>
+                    <h3 class="project-title">Papa Mike Saúde</h3>
+                    <p class="project-desc">Site focado em trazer novos profissionais para área da saúde.</p>
+                    <a href="https://papamikesaude.com.br" target="_blank" class="btn btn-outline btn-full">Ver Resultado</a>
+                </div>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                <img src="https://placehold.co/600x400/f59e0b/FFF?text=Landing+Page" class="project-img">
+                <div class="project-content">
+                    <span class="project-category">Vendas</span>
+                    <h3 class="project-title">Matrículas Kids</h3>
+                    <p class="project-desc">Página de alta conversão para aumentar matrículas escolares.</p>
+                    <a href="https://lpkids.papamike.com.br" target="_blank" class="btn btn-outline btn-full">Ver Resultado</a>
+                </div>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                <img src="https://placehold.co/600x400/000000/FFF?text=E-commerce" class="project-img">
+                <div class="project-content">
+                    <span class="project-category">Vendas</span>
+                    <h3 class="project-title">E-commerce</h3>
+                    <p class="project-desc">Loja dedicada na venda de produtos. Tenha total controle da sua loja, painel administrador avançado. </p>
+                    <a href="https://loja-futuro.vercel.app/" target="_blank" class="btn btn-outline btn-full">Ver Resultado</a>
+                </div>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                <img src="imagens/intranet.png" class="project-img">
+                <div class="project-content">
+                    <span class="project-category">Interno</span>
+                    <h3 class="project-title">Intranet</h3>
+                    <p class="project-desc">Sistema web dedicado na empresa, avisos, cardápio, documentos, eventos e mais! </p>
+                    <a class="btn btn-outline btn-full">🚫Acesso Restrito</a>
+                </div>
+            </div>
+        </div>
+        <p class="swipe-hint"><i data-lucide="arrow-right" style="vertical-align: middle; width: 16px;"></i> Deslize para ver mais</p>
+    </section>
+
+    <section class="section-padding container">
+        <div class="process-bg">
+            <div class="section-title" style="margin-bottom: 3rem;">Como eu Trabalho</div>
+            <div class="process-steps">
+                <div class="step-item" data-aos="fade-up">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h4>Entendimento</h4>
+                        <p>Conversamos para entender o que seu negócio realmente precisa.</p>
+                    </div>
+                </div>
+                <div class="step-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h4>Produção</h4>
+                        <p>Desenvolvo o projeto com foco em design e segurança.</p>
+                    </div>
+                </div>
+                <div class="step-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h4>Entrega</h4>
+                        <p>Seu site vai ao ar pronto para receber clientes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding container">
+        <div class="section-title">Dúvidas Comuns</div>
+        <div class="faq-grid">
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div style="display: flex; justify-content: space-between; font-weight: 700;">Como funciona o pagamento? <i data-lucide="chevron-down"></i></div>
+                <div class="faq-answer">Trabalho com um valor único de produção. Taxas de manutenção são cobradas apenas se você precisar.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div style="display: flex; justify-content: space-between; font-weight: 700;">Preciso pagar hospedagem? <i data-lucide="chevron-down"></i></div>
+                <div class="faq-answer">A Hospedagem e o Domínio já estão inclusos no orçamento inicial. Tudo configurado para você.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="section-padding container" style="text-align: center;">
+        <div style="background: white; padding: 3rem; border-radius: 32px; box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);">
+            <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Quem é o Kauã?</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #475569; max-width: 800px; margin: 0 auto;">
+                Tenho <span id="ageDisplay">21</span> anos. Não sou apenas um "programador", sou um parceiro para o seu negócio. <br>Minha missão é entregar ferramentas que funcionam.
+            </p>
+        </div>
+    </section>
+
+    <a href="#" onclick="openWhatsappDirect()" class="whatsapp-float"><i data-lucide="message-circle" size="30"></i></a>
+    
+    <div id="leadModal" class="modal-overlay">
+        <div class="wizard-box">
+            
+            <div class="wizard-header">
+                <div class="progress-indicator">
+                    <div class="progress-dot active" id="dot1"></div>
+                    <div class="progress-dot" id="dot2"></div>
+                    <div class="progress-dot" id="dot3"></div>
+                    <div class="progress-dot" id="dot4"></div>
+                </div>
+                <div class="close-btn" onclick="closeModal()"><i data-lucide="x"></i></div>
+            </div>
+
+            <div class="wizard-body">
+                
+                <div id="step1" style="display: block;">
+                    <div class="step-icon-wrapper">
+                        <i data-lucide="rocket" size="40"></i>
+                    </div>
+                    <h2 class="step-title">Vamos começar?</h2>
+                    <p class="step-subtitle">Responda algumas perguntas rápidas para eu entender seu projeto.</p>
+                    <button onclick="nextStep()" class="btn btn-primary btn-full" style="padding: 1.2rem;">Iniciar agora</button>
+                </div>
+
+                <div id="step2" style="display: none;">
+                    <h2 class="step-title">O que você precisa?</h2>
+                    <p class="step-subtitle">Escolha a categoria que melhor se encaixa.</p>
+                    
+                    <div class="options-grid">
+                        <div class="option-card" onclick="selectOption('Landing Page')"><i data-lucide="layout"></i><span>Landing Page</span></div>
+                        <div class="option-card" onclick="selectOption('Site Institucional')"><i data-lucide="globe"></i><span>Site</span></div>
+                        <div class="option-card" onclick="selectOption('E-commerce')"><i data-lucide="shopping-bag"></i><span>Loja Virtual</span></div>
+                        <div class="option-card" onclick="selectOption('Sistema Web')"><i data-lucide="monitor"></i><span>Sistema</span></div>
+                        <div class="option-card" onclick="selectOption('App Mobile')"><i data-lucide="smartphone"></i><span>App</span></div>
+                        <div class="option-card" onclick="selectOption('Blog/Portal')"><i data-lucide="file-text"></i><span>Blog</span></div>
+                        <div class="option-card" onclick="selectOption('API/Integração')"><i data-lucide="server"></i><span>API</span></div>
+                        <div class="option-card" onclick="selectOption('Outro')"><i data-lucide="plus-circle"></i><span>Outro</span></div>
+                    </div>
+
+                    <div id="otherInputContainer" style="display: none; margin-top: 2rem; text-align: left;">
+                        <label style="font-weight: 700; color: var(--dark); display: block; margin-bottom: 0.5rem;">Qual seria o projeto?</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="otherInput" class="form-input" placeholder="Ex: Bot de Discord, Automação..." style="margin-bottom: 0;">
+                            <button onclick="confirmOther()" class="btn btn-primary" style="padding: 0 2rem;">Ok</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step3" style="display: none;">
+                    <div class="step-icon-wrapper">
+                        <i data-lucide="user" size="40"></i>
+                    </div>
+                    <h2 class="step-title">Seus Dados</h2>
+                    <p class="step-subtitle">Para onde devo enviar o orçamento?</p>
+                    
+                    <input type="text" id="inputName" class="form-input" placeholder="Seu Nome Completo">
+                    <input type="text" id="inputContact" class="form-input" placeholder="WhatsApp (com DDD)">
+                    
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="prevStep()" class="btn btn-outline" style="flex: 1;">Voltar</button>
+                        <button onclick="validateAndNext()" class="btn btn-primary" style="flex: 2;">Ver Resumo</button>
+                    </div>
+                </div>
+
+                <div id="step4" style="display: none;">
+                    <div class="step-icon-wrapper" style="background: #ecfdf5; color: #10b981;">
+                        <i data-lucide="check-circle" size="40"></i>
+                    </div>
+                    <h2 class="step-title">Tudo pronto!</h2>
+                    <p class="step-subtitle">Confira se está tudo certo antes de enviar.</p>
+
+                    <div class="summary-card">
+                        <div class="summary-row"><strong>Projeto:</strong> <span id="summaryType">...</span></div>
+                        <div class="summary-row"><strong>Nome:</strong> <span id="summaryName">...</span></div>
+                        <div class="summary-row"><strong>Contato:</strong> <span id="summaryContact">...</span></div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem;">
+                        <button onclick="prevStep()" class="btn btn-outline" style="flex: 1;">Corrigir</button>
+                        <button onclick="finishOrder()" class="btn btn-primary" style="flex: 2;">Enviar no WhatsApp</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        lucide.createIcons();
+        AOS.init();
+        document.getElementById('ageDisplay').innerText = new Date().getFullYear() - 2004;
+
+        function toggleFaq(el) { el.classList.toggle('active'); }
+
+        // --- WIZARD LOGIC ---
+        let currentStep = 1;
+        let selectedOption = '';
+
+        function openWizard(preSelect) {
+            document.getElementById('leadModal').style.display = 'flex';
+            setTimeout(() => document.getElementById('leadModal').classList.add('active'), 10);
+            
+            // Resetar
+            document.getElementById('otherInputContainer').style.display = 'none';
+            document.getElementById('otherInput').value = '';
+            document.querySelectorAll('.option-card').forEach(el => el.classList.remove('selected'));
+            
+            currentStep = 1; updateUI();
+        }
+
+        function closeModal() {
+            document.getElementById('leadModal').classList.remove('active');
+            setTimeout(() => document.getElementById('leadModal').style.display = 'none', 300);
+        }
+
+        function selectOption(opt) {
+            document.querySelectorAll('.option-card').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            const otherContainer = document.getElementById('otherInputContainer');
+            
+            if (opt === 'Outro') {
+                otherContainer.style.display = 'block';
+                document.getElementById('otherInput').focus();
+            } else {
+                otherContainer.style.display = 'none';
+                selectedOption = opt;
+                setTimeout(nextStep, 250);
+            }
+        }
+
+        function confirmOther() {
+            const val = document.getElementById('otherInput').value;
+            if(!val) {
+                Swal.fire({
+                    title: 'Atenção',
+                    text: 'Por favor, descreva qual seria o projeto.',
+                    icon: 'warning',
+                    confirmButtonColor: '#0284c7'
+                });
+                return;
+            }
+            selectedOption = val;
+            nextStep();
+        }
+
+        function validateAndNext() {
+            const name = document.getElementById('inputName').value;
+            const contact = document.getElementById('inputContact').value;
+            
+            if(!name || !contact) {
+                Swal.fire({
+                    title: 'Ops!',
+                    text: 'Preencha seu nome e contato para continuarmos.',
+                    icon: 'warning',
+                    confirmButtonColor: '#0284c7'
+                });
+                return;
+            }
+
+            document.getElementById('summaryType').innerText = selectedOption;
+            document.getElementById('summaryName').innerText = name;
+            document.getElementById('summaryContact').innerText = contact;
+            nextStep();
+        }
+
+        function nextStep() { currentStep++; updateUI(); }
+        function prevStep() { currentStep--; updateUI(); }
+
+        function updateUI() {
+            for(let i=1; i<=4; i++) {
+                document.getElementById('step'+i).style.display = (i===currentStep) ? 'block' : 'none';
+                const dot = document.getElementById('dot'+i);
+                if(i <= currentStep) dot.classList.add('active');
+                else dot.classList.remove('active');
+            }
+        }
+
+        function finishOrder() {
+            const name = document.getElementById('inputName').value;
+            window.open(`https://wa.me/5511985394101?text=Olá Kauã! Me chamo *${name}* e gostaria de um orçamento para um projeto de *${selectedOption}*.`, '_blank');
+            closeModal();
+            
+            setTimeout(() => {
+                document.getElementById('inputName').value = '';
+                document.getElementById('inputContact').value = '';
+                currentStep = 1;
+            }, 1000);
+        }
+
+        function openWhatsappDirect() {
+            window.open('https://wa.me/5511985394101', '_blank');
+        }
+
+        // Scroll Spy
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - section.clientHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-target') === current) item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
