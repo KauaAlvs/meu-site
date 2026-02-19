@@ -1,0 +1,6 @@
+# Permite que todos os robôs (Google, Bing, etc.) indexem o site
+User-agent: *
+Allow: /
+
+# Indica a localização do mapa do site para acelerar a indexação
+Sitemap: https://site-kaua.vercel.app/sitemap.xml
