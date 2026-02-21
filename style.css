@@ -1,0 +1,340 @@
+/* ========================================================
+   1. VARIÁVEIS E BASE
+   ======================================================== */
+:root {
+    --primary: #0284c7;       
+    --primary-hover: #0369a1;
+    --accent: #38bdf8;        
+    --dark: #0f172a;          
+    --text-body: #475569;     
+    --bg-body: #f8fafc;
+    --white: #ffffff;
+    --border: #e2e8f0;
+    
+    --radius-xl: 32px;
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    
+    --shadow-card: 0 10px 40px -10px rgba(2, 132, 199, 0.08);
+    --shadow-modal: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+    --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Fixes Globais e Z-Index */
+div:where(.swal2-container) { z-index: 99999 !important; }
+.modal-overlay { z-index: 9999 !important; }
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Plus Jakarta Sans', sans-serif; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background-color: var(--bg-body); color: var(--dark); overflow-x: hidden; padding-bottom: 120px; }
+
+/* ========================================================
+   2. TYPOGRAPHY & LAYOUT GERAL
+   ======================================================== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+.section-padding { padding: 6rem 0; }
+.section-title { text-align: center; margin-bottom: 4rem; font-size: clamp(2rem, 5vw, 2.5rem); font-weight: 800; color: var(--dark); }
+
+/* ========================================================
+   3. BOTÕES
+   ======================================================== */
+.btn { 
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px; 
+    padding: 1rem 2.2rem; border-radius: 16px; font-weight: 700; text-decoration: none; 
+    transition: all 0.3s var(--ease-elastic); border: none; cursor: pointer; font-size: 1rem; 
+}
+.btn:active { transform: scale(0.95); }
+.btn-primary { background: var(--dark); color: white; box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.3); }
+.btn-glass { background: white; border: 1px solid var(--primary); color: var(--primary); }
+.btn-outline { border: 2px solid var(--border); background: transparent; color: var(--text-body); }
+.btn-full { width: 100%; }
+
+@media (hover: hover) {
+    .btn-primary:hover { transform: translateY(-5px); background: #1e293b; }
+    .btn-glass:hover { background: rgba(2, 132, 199, 0.05); transform: translateY(-5px); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+}
+
+/* ========================================================
+   4. DOCK MENU (DESKTOP)
+   ======================================================== */
+.nav-dock {
+    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    padding: 0.8rem 2.5rem; border-radius: 100px;
+    display: flex; gap: 2rem; align-items: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    z-index: 1000; border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+}
+.nav-links-group { display: flex; gap: 2rem; }
+.nav-divider { width: 1px; height: 24px; background: rgba(255,255,255,0.2); }
+.nav-social-group { display: flex; gap: 1.5rem; align-items: center; }
+
+.nav-item {
+    color: rgba(255,255,255,0.6); text-decoration: none; font-weight: 600; font-size: 0.9rem;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: all 0.4s var(--ease-elastic); cursor: pointer;
+}
+.nav-item.active { color: var(--accent); }
+.nav-item.active span { transform: scale(1.15); font-weight: 800; text-shadow: 0 0 20px rgba(56, 189, 248, 0.5); }
+.nav-icon { display: none; width: 22px; height: 22px; margin-bottom: 4px; stroke-width: 2.5; }
+.nav-text { display: block; } 
+
+.nav-social { width: 24px; height: 24px; color: rgba(255,255,255,0.8); transition: 0.3s; display: flex; }
+.nav-social:hover { color: white; transform: translateY(-3px); }
+
+/* ========================================================
+   5. SEÇÕES GERAIS (DESKTOP)
+   ======================================================== */
+.hero { 
+    min-height: 100vh; 
+    display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; 
+    padding: 0 2rem; background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.1) 0%, transparent 60%);
+}
+.badge-disponivel { background: rgba(2, 132, 199, 0.1); color: var(--primary); padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 700; font-size: 0.85rem; margin-bottom: 1.5rem; text-transform: uppercase; }
+.hero h1 { font-size: clamp(2.8rem, 8vw, 4.8rem); line-height: 1.1; margin-bottom: 1.5rem; color: var(--dark); font-weight: 800; letter-spacing: -1px; }
+.hero h1 span { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: clamp(1.1rem, 3vw, 1.25rem); color: var(--text-body); max-width: 650px; margin: 0 auto 2.5rem; line-height: 1.6; }
+.hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+/* Serviços */
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+.service-card { background: white; padding: 3rem; border-radius: var(--radius-xl); border: 1px solid rgba(0,0,0,0.05); display: flex; flex-direction: column; height: 100%; transition: 0.3s; }
+.service-icon { width: 70px; height: 70px; background: #f0f9ff; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: var(--primary); margin-bottom: 2rem; }
+.service-card h3 { font-size: 1.6rem; margin-bottom: 1rem; font-weight: 800; }
+.service-content { flex: 1; }
+.service-content p { color: var(--text-body); line-height: 1.6; margin-bottom: 2.5rem; }
+.service-card .btn { margin-top: auto; }
+
+/* Cases */
+.projects-wrapper { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+.project-card { background: white; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid rgba(0,0,0,0.05); display: flex; flex-direction: column; transition: 0.3s; height: 100%; }
+.project-img { height: 260px; width: 100%; object-fit: cover; }
+.project-content { padding: 2.5rem; flex: 1; display: flex; flex-direction: column; }
+.project-category { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
+.project-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.8rem; }
+.project-desc { color: var(--text-body); margin-bottom: 2rem; flex: 1; line-height: 1.6;}
+.swipe-hint { display: none; text-align: center; margin-top: 1rem; color: #94a3b8; font-size: 0.9rem; align-items: center; justify-content: center; gap: 8px;}
+
+/* Processo */
+.process-bg { background: #f0f9ff; border-radius: 40px; margin: 2rem auto; width: 100%; padding: 4rem 2rem; }
+.process-title { margin-bottom: 3rem; }
+.process-steps { display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap; text-align: center; }
+.step-item { flex: 1; min-width: 250px; max-width: 320px; position: relative; }
+.step-number { font-size: 5rem; font-weight: 900; color: rgba(2, 132, 199, 0.1); line-height: 1; margin-bottom: -1.8rem; position: relative; z-index: 0; }
+.step-content { position: relative; z-index: 1; }
+.step-content h4 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--dark); }
+.step-content p { color: var(--text-body); font-size: 1rem; line-height: 1.6; }
+
+/* FAQ */
+.faq-grid { max-width: 800px; margin: 0 auto; display: grid; gap: 1rem; }
+.faq-item { background: white; border-radius: 16px; padding: 1.5rem; border: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; }
+.faq-header { display: flex; justify-content: space-between; font-weight: 700; color: var(--dark); }
+.faq-answer { display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; color: var(--text-body); line-height: 1.6;}
+.faq-item.active .faq-answer { display: block; animation: slideDown 0.3s ease; }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Sobre */
+.sobre-card { background: white; padding: 4rem 2rem; border-radius: var(--radius-xl); box-shadow: var(--shadow-card); text-align: center; }
+.sobre-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 1.5rem; }
+.sobre-text { font-size: 1.1rem; line-height: 1.8; color: var(--text-body); max-width: 700px; margin: 0 auto; }
+
+/* WhatsApp Float */
+.whatsapp-float { position: fixed; bottom: 100px; right: 30px; background: #25D366; color: white; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); z-index: 900; transition: transform 0.3s var(--ease-elastic); }
+
+/* ========================================================
+   6. MODAL WIZARD (DESKTOP)
+   ======================================================== */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
+.modal-overlay.active { opacity: 1; }
+.wizard-box { background: white; width: 95%; max-width: 700px; border-radius: var(--radius-xl); max-height: 90vh; overflow-y: auto; transform: translateY(30px); transition: 0.4s var(--ease-elastic); display: flex; flex-direction: column; box-shadow: var(--shadow-modal); }
+.modal-overlay.active .wizard-box { transform: translateY(0); }
+
+.wizard-header { padding: 2rem 3rem 1rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: white; z-index: 10; }
+.progress-indicator { display: flex; gap: 8px; }
+.progress-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); transition: 0.3s; }
+.progress-dot.active { background: var(--primary); transform: scale(1.3); }
+.close-btn { cursor: pointer; color: var(--text-body); transition: 0.3s; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--bg-body); }
+.close-btn:hover { background: #fee2e2; color: #ef4444; transform: rotate(90deg); }
+
+.wizard-body { padding: 1rem 3rem 3rem; flex: 1; text-align: center; }
+.step-icon-wrapper { width: 80px; height: 80px; background: #f0f9ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); margin: 0 auto 1.5rem; }
+.step-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.8rem; color: var(--dark); }
+.step-subtitle { color: var(--text-body); margin-bottom: 2.5rem; font-size: 1rem; }
+
+.options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; text-align: left; }
+.option-card { border: 2px solid var(--border); border-radius: 16px; padding: 1.2rem 1rem; cursor: pointer; transition: 0.3s; background: white; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.option-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+.option-card.selected { border-color: var(--primary); background: #f0f9ff; color: var(--primary); }
+.option-card span { font-size: 0.9rem; font-weight: 700; text-align: center;}
+
+.other-input-container { display: none; margin-top: 1.5rem; text-align: left; animation: fadeIn 0.3s ease; }
+.other-input-container label { font-weight: 700; color: var(--dark); display: block; margin-bottom: 0.5rem; }
+.other-input-wrapper { display: flex; gap: 10px; }
+
+.form-input { width: 100%; padding: 1.2rem 1.5rem; border: 2px solid var(--border); border-radius: var(--radius-md); font-size: 1rem; margin-bottom: 1.2rem; outline: none; transition: 0.3s; }
+.form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1); }
+
+.wizard-actions { display: flex; gap: 1rem; margin-top: 1rem; }
+
+.summary-card { background: var(--bg-body); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; text-align: left; margin-bottom: 2rem; }
+.summary-row { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 1.05rem; border-bottom: 1px solid var(--border); padding-bottom: 0.8rem; }
+.summary-row:last-child { border: none; margin: 0; padding: 0; }
+.summary-row span { color: var(--primary); font-weight: 700; }
+
+/* ========================================================
+   7. OTIMIZAÇÃO MOBILE EXTREMA (O SEGREDO DOS PRINTS)
+   ======================================================== */
+@media (max-width: 768px) {
+    /* Ajustes Gerais */
+    .section-padding { padding: 4rem 0; }
+    .section-title { font-size: 1.8rem; margin-bottom: 2.5rem; }
+    
+    /* 1. HERO 100% DA TELA */
+    .hero { 
+        min-height: 100dvh; /* Força 100% da tela do celular real */
+        padding: 0 1.5rem; /* Sem padding vertical fixo */
+        justify-content: center;
+    }
+    
+    .hero-buttons { flex-direction: column; width: 100%; max-width: 320px; gap: 1rem; margin: 0 auto; }
+    .hero-buttons .btn { width: 100%; padding: 1.2rem; font-size: 1.1rem; }
+
+    /* 2. MENU MOBILE: PÍLULA AGRUPADA SEM BURACOS (Baseado no Print) */
+    .nav-dock { 
+        width: 92%; 
+        max-width: 400px; 
+        bottom: 1.2rem; left: 50%; transform: translateX(-50%);
+        border-radius: 100px; 
+        padding: 0.8rem 1rem; 
+        background: rgba(15, 23, 42, 0.95);
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between; /* Distribui tudo dentro da barra */
+        gap: 0.5rem; /* Gap geral pequeno, evitamos margens rígidas */
+    }
+    
+    .nav-links-group { 
+        display: flex; 
+        flex: 1; /* Ocupa todo o espaço esquerdo */
+        justify-content: space-evenly; /* Distribui ícones de navegação de forma igual e suave */
+        gap: 0; 
+    }
+    
+    .nav-divider { 
+        display: block; 
+        height: 24px; 
+        margin: 0 0.5rem; /* Margem leve só na divisória */
+        opacity: 0.3; 
+    }
+    
+    .nav-social-group { 
+        display: flex; 
+        gap: 0.8rem; 
+        align-items: center; 
+        padding-right: 0.5rem; /* Espaço para não encostar na borda direita */
+    }
+    
+    /* Configuração Ícones/Texto Mobile */
+    .nav-item { 
+        flex: 1; /* Todos os itens de navegação têm o mesmo peso/largura */
+        min-width: 0; /* Previne estouro do flexbox */
+        color: rgba(255,255,255,0.6); 
+        padding: 0; 
+        text-align: center;
+    }
+    
+    .nav-icon { display: block !important; margin: 0 auto 3px; width: 22px; height: 22px; }
+    .nav-text { 
+        display: block; 
+        font-size: 0.65rem; 
+        font-weight: 500; 
+        transform: none !important; 
+        white-space: nowrap; /* Não quebra linha */
+    }
+    
+    .nav-item.active { color: var(--accent); }
+    .nav-social { width: 20px; height: 20px; color: rgba(255,255,255,0.8); }
+
+    /* 3. CARDS DE SOLUÇÃO (DESGRUDADOS DAS LATERAIS) */
+    .services-grid { gap: 1.5rem; padding: 0; }
+    .service-card { 
+        padding: 2.5rem 1.5rem; 
+        border-radius: 24px; 
+        /* Define um limite para desgrudar da borda do celular */
+        max-width: 360px; 
+        margin: 0 auto; 
+        width: 100%;
+    }
+    .service-icon { width: 60px; height: 60px; margin-bottom: 1.5rem; }
+    .service-card h3 { font-size: 1.4rem; }
+    .service-content p { margin-bottom: 1.5rem; font-size: 0.95rem; }
+
+    /* 4. CARROSSEL DE CASES (DESTRAVADO E FLUIDO) */
+    .projects-wrapper { 
+        display: flex; 
+        flex-wrap: nowrap; /* Impede que quebrem linha */
+        overflow-x: auto; 
+        scroll-snap-type: x mandatory; 
+        gap: 1.2rem; 
+        padding: 1rem 1.5rem 2rem 1.5rem; 
+        margin: 0 -1.5rem; /* Sangria para rolar até a borda da tela */
+        scrollbar-width: none; 
+        -webkit-overflow-scrolling: touch; 
+    }
+    .projects-wrapper::-webkit-scrollbar { display: none; }
+    
+    .project-card { 
+        /* REGRA DE OURO: Mantém o card com 85% de largura, ativando o scroll */
+        flex: 0 0 85%; 
+        max-width: 320px; 
+        scroll-snap-align: center; 
+        border-radius: 20px;
+    }
+    .project-img { height: 200px; }
+    .project-content { padding: 1.5rem; }
+    .project-title { font-size: 1.3rem; }
+    .project-desc { font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .swipe-hint { display: flex; }
+
+    /* PROCESSO (ETAPAS) */
+    .process-bg { padding: 2.5rem 1.5rem; border-radius: 24px; }
+    .process-steps { gap: 2rem; padding: 0; }
+    .step-item { min-width: 100%; padding: 0; text-align: left; display: flex; gap: 1rem; align-items: flex-start; }
+    .step-number { font-size: 3rem; margin: 0; line-height: 0.8; }
+    .step-content h4 { font-size: 1.2rem; margin-bottom: 0.3rem;}
+
+    /* SOBRE */
+    .sobre-card { padding: 2.5rem 1.5rem; border-radius: 24px; }
+    .sobre-title { font-size: 1.6rem; }
+    .sobre-text { font-size: 1rem; }
+
+    /* MODAL COMO BOTTOM SHEET NATIVO */
+    .wizard-box { 
+        position: absolute; bottom: 0; left: 0; width: 100%; max-height: 90vh; 
+        border-radius: 24px 24px 0 0; 
+        transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        padding: 0;
+    }
+    .modal-overlay.active .wizard-box { transform: translateY(0); }
+    
+    .wizard-header { padding: 1.5rem 1.5rem 1rem; background: white; border-bottom: none;}
+    .wizard-body { padding: 0 1.5rem 2rem; text-align: left; }
+    
+    .step-icon-wrapper { width: 60px; height: 60px; margin: 0 0 1rem 0; } 
+    .step-title { font-size: 1.5rem; }
+    .step-subtitle { margin-bottom: 1.5rem; text-align: left;}
+    
+    .options-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+    .option-card { padding: 1rem 0.5rem; border-radius: 12px; gap: 8px;}
+    .option-card i { width: 24px; height: 24px; }
+    
+    .wizard-actions { flex-direction: column-reverse; gap: 0.8rem; margin-top: 1.5rem; }
+    .wizard-btn { padding: 1.2rem; }
+    
+    .other-input-wrapper { flex-direction: column; gap: 0.8rem; }
+    .other-input-wrapper button { width: 100%; padding: 1.2rem; }
+
+    .whatsapp-float { bottom: 95px; right: 15px; width: 55px; height: 55px; }
+}
