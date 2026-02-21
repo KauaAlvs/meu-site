@@ -84,6 +84,9 @@
                 <button onclick="openWizard('sistema')" class="btn btn-primary btn-full">Quero um Sistema</button>
             </div>
         </div>
+        <div style="text-align: center; margin-top: 3rem;" data-aos="fade-up">
+            <a href="solucoes.html" class="btn btn-outline">Ver todas as soluções detalhadas <i data-lucide="arrow-right" style="width: 18px;"></i></a>
+        </div>
     </section>
 
     <section id="cases" class="section-padding container">
@@ -95,7 +98,6 @@
                     <span class="project-category">Gestão</span>
                     <h3 class="project-title">Ecossistema Papa Mike</h3>
                     <p class="project-desc">Sistema completo que unificou o Marketing, Vendas e Financeiro da escola.</p>
-                    <a href="https://papamike.com.br" target="_blank" class="btn btn-outline btn-full">Ver Resultado</a>
                 </div>
             </div>
             <div class="project-card" data-aos="fade-up" data-aos-delay="100">
@@ -104,7 +106,6 @@
                     <span class="project-category">Web</span>
                     <h3 class="project-title">APIT Jovem Aprendiz</h3>
                     <p class="project-desc">Portal de empregabilidade para gestão de vagas e currículos.</p>
-                    <a href="https://apitaprendiz.org.br" target="_blank" class="btn btn-outline btn-full">Ver Resultado</a>
                 </div>
             </div>
             <div class="project-card" data-aos="fade-up" data-aos-delay="200">
@@ -113,7 +114,6 @@
                     <span class="project-category">Institucional</span>
                     <h3 class="project-title">Papa Mike Saúde</h3>
                     <p class="project-desc">Site focado em trazer novos profissionais para área da saúde.</p>
-                    <a href="https://papamikesaude.com.br" target="_blank" class="btn btn-outline btn-full">Ver Resultado</a>
                 </div>
             </div>
             <div class="project-card" data-aos="fade-up" data-aos-delay="300">
@@ -122,29 +122,14 @@
                     <span class="project-category">Vendas</span>
                     <h3 class="project-title">Matrículas Kids</h3>
                     <p class="project-desc">Página de alta conversão para aumentar matrículas escolares.</p>
-                    <a href="https://lpkids.papamike.com.br" target="_blank" class="btn btn-outline btn-full">Ver Resultado</a>
-                </div>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="400">
-                <img src="https://placehold.co/600x400/000000/FFF?text=E-commerce" class="project-img" alt="E-commerce">
-                <div class="project-content">
-                    <span class="project-category">Vendas</span>
-                    <h3 class="project-title">E-commerce</h3>
-                    <p class="project-desc">Loja dedicada na venda de produtos. Controle total com painel administrador.</p>
-                    <a href="https://loja-futuro.vercel.app/" target="_blank" class="btn btn-outline btn-full">Ver Resultado</a>
-                </div>
-            </div>
-            <div class="project-card" data-aos="fade-up" data-aos-delay="500">
-                <img src="https://placehold.co/600x400/475569/FFF?text=Intranet" class="project-img" alt="Intranet Interna">
-                <div class="project-content">
-                    <span class="project-category">Interno</span>
-                    <h3 class="project-title">Intranet</h3>
-                    <p class="project-desc">Sistema web dedicado na empresa, avisos, cardápio, documentos e mais!</p>
-                    <a class="btn btn-outline btn-full">🚫 Acesso Restrito</a>
                 </div>
             </div>
         </div>
-        <p class="swipe-hint"><i data-lucide="arrow-right"></i> Deslize para ver mais</p>
+        <p class="swipe-hint"><i data-lucide="arrow-right" style="vertical-align: middle; width: 16px;"></i> Deslize para ver mais</p>
+        
+        <div style="text-align: center; margin-top: 2.5rem;" data-aos="fade-up">
+            <a href="projetos.html" class="btn btn-outline">Ver Portfólio Completo <i data-lucide="arrow-right" style="width: 18px;"></i></a>
+        </div>
     </section>
 
     <section class="section-padding container">
@@ -196,14 +181,22 @@
             <p class="sobre-text">
                 Tenho <span id="ageDisplay">21</span> anos. Não sou apenas um "programador", sou um parceiro para o seu negócio. <br>Minha missão é entregar ferramentas que funcionam.
             </p>
+            <div style="margin-top: 2rem;">
+                <a href="sobre.html" class="btn btn-outline">Conheça minha trajetória <i data-lucide="arrow-right" style="width: 18px;"></i></a>
+            </div>
         </div>
+    </section>
+
+    <section id="contato" class="section-padding container" style="text-align: center; margin-bottom: 4rem;">
+        <h2 class="section-title" style="margin-bottom: 1.5rem;">Vamos transformar sua ideia em realidade?</h2>
+        <p style="color: var(--text-body); margin-bottom: 2rem; font-size: 1.1rem;">Estou pronto para analisar seu projeto e propor a melhor solução tecnológica.</p>
+        <a href="contato.html" class="btn btn-primary">Entrar em Contato <i data-lucide="mail" style="width: 18px;"></i></a>
     </section>
 
     <a href="#" onclick="openWhatsappDirect()" class="whatsapp-float"><i data-lucide="message-circle" size="30"></i></a>
     
     <div id="leadModal" class="modal-overlay">
         <div class="wizard-box">
-            
             <div class="wizard-header">
                 <div class="progress-indicator">
                     <div class="progress-dot active" id="dot1"></div>
@@ -215,11 +208,8 @@
             </div>
 
             <div class="wizard-body">
-                
                 <div id="step1" class="step-content-box" style="display: block;">
-                    <div class="step-icon-wrapper">
-                        <i data-lucide="rocket" size="32"></i>
-                    </div>
+                    <div class="step-icon-wrapper"><i data-lucide="rocket" size="32"></i></div>
                     <h2 class="step-title">Vamos começar?</h2>
                     <p class="step-subtitle">Responda algumas perguntas rápidas para eu entender seu projeto.</p>
                     <button onclick="nextStep()" class="btn btn-primary btn-full wizard-btn">Iniciar agora</button>
@@ -228,7 +218,6 @@
                 <div id="step2" class="step-content-box" style="display: none;">
                     <h2 class="step-title">O que você precisa?</h2>
                     <p class="step-subtitle">Escolha a categoria que melhor se encaixa.</p>
-                    
                     <div class="options-grid">
                         <div class="option-card" onclick="selectOption('Landing Page')"><i data-lucide="layout"></i><span>Landing Page</span></div>
                         <div class="option-card" onclick="selectOption('Site Institucional')"><i data-lucide="globe"></i><span>Site</span></div>
@@ -239,7 +228,6 @@
                         <div class="option-card" onclick="selectOption('API/Integração')"><i data-lucide="server"></i><span>API</span></div>
                         <div class="option-card" onclick="selectOption('Outro')"><i data-lucide="plus-circle"></i><span>Outro</span></div>
                     </div>
-
                     <div id="otherInputContainer" class="other-input-container">
                         <label>Qual seria o projeto?</label>
                         <div class="other-input-wrapper">
@@ -250,15 +238,11 @@
                 </div>
 
                 <div id="step3" class="step-content-box" style="display: none;">
-                    <div class="step-icon-wrapper">
-                        <i data-lucide="user" size="32"></i>
-                    </div>
+                    <div class="step-icon-wrapper"><i data-lucide="user" size="32"></i></div>
                     <h2 class="step-title">Seus Dados</h2>
                     <p class="step-subtitle">Para onde devo enviar o orçamento?</p>
-                    
                     <input type="text" id="inputName" class="form-input" placeholder="Seu Nome Completo">
                     <input type="text" id="inputContact" class="form-input" placeholder="WhatsApp (com DDD)">
-                    
                     <div class="wizard-actions">
                         <button onclick="prevStep()" class="btn btn-outline" style="flex: 1;">Voltar</button>
                         <button onclick="validateAndNext()" class="btn btn-primary" style="flex: 2;">Ver Resumo</button>
@@ -266,24 +250,19 @@
                 </div>
 
                 <div id="step4" class="step-content-box" style="display: none;">
-                    <div class="step-icon-wrapper" style="background: #ecfdf5; color: #10b981;">
-                        <i data-lucide="check-circle" size="32"></i>
-                    </div>
+                    <div class="step-icon-wrapper" style="background: #ecfdf5; color: #10b981;"><i data-lucide="check-circle" size="32"></i></div>
                     <h2 class="step-title">Tudo pronto!</h2>
                     <p class="step-subtitle">Confira se está tudo certo antes de enviar.</p>
-
                     <div class="summary-card">
                         <div class="summary-row"><strong>Projeto:</strong> <span id="summaryType">...</span></div>
                         <div class="summary-row"><strong>Nome:</strong> <span id="summaryName">...</span></div>
                         <div class="summary-row"><strong>Contato:</strong> <span id="summaryContact">...</span></div>
                     </div>
-
                     <div class="wizard-actions">
                         <button onclick="prevStep()" class="btn btn-outline" style="flex: 1;">Corrigir</button>
                         <button onclick="finishOrder()" class="btn btn-primary" style="flex: 2;">Enviar no WhatsApp</button>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -291,8 +270,6 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         lucide.createIcons();
-        
-        // Desativa animações em celulares pequenos para performance máxima e evitar pulos de tela
         AOS.init({ disable: window.innerWidth < 768 }); 
         
         document.getElementById('ageDisplay').innerText = new Date().getFullYear() - 2004;
@@ -374,7 +351,7 @@
 
         function finishOrder() {
             const name = document.getElementById('inputName').value;
-            window.open(`https://wa.me/5511976965693?text=Olá Kauã! Me chamo *${name}* e gostaria de um orçamento para um projeto de *${selectedOption}*.`, '_blank');
+            window.open(`https://wa.me/5511985394101?text=Olá Kauã! Me chamo *${name}* e gostaria de um orçamento para um projeto de *${selectedOption}*.`, '_blank');
             closeModal();
             setTimeout(() => {
                 document.getElementById('inputName').value = '';
@@ -384,10 +361,10 @@
         }
 
         function openWhatsappDirect() {
-            window.open('https://wa.me/5511976965693', '_blank');
+            window.open('https://wa.me/5511985394101', '_blank');
         }
 
-        // Scroll Spy para Menu
+        // Scroll Spy
         const sections = document.querySelectorAll('section');
         const navItems = document.querySelectorAll('.nav-item');
         window.addEventListener('scroll', () => {

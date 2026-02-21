@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <meta name="robots" content="index, follow">
+    <title>Sobre Mim & Metodologia | Kauã Alves</title>
+    <meta name="description" content="Conheça Kauã Alves, desenvolvedor com 4 anos de experiência, e entenda como funciona a contratação, pagamentos e manutenções.">
+    
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%230284c7"/><text x="50" y="50" dy=".35em" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="70" fill="white">K</text></svg>'>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ========================================================
+           ESTILOS EXCLUSIVOS DA PÁGINA "SOBRE"
+           ======================================================== */
+        .page-header {
+            padding: 160px 1.5rem 80px;
+            background: linear-gradient(to bottom, #f0f9ff, var(--bg-body));
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--dark);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-body);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Seção BIO */
+        .bio-section {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            margin-bottom: 6rem;
+            background: white;
+            padding: 4rem;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .bio-image {
+            flex: 0 0 350px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+        }
+        .bio-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .bio-content {
+            flex: 1;
+        }
+        .bio-content h2 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        .bio-content p {
+            color: var(--text-body);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        /* Seção PROCEDIMENTOS E PAGAMENTOS */
+        .procedure-card {
+            background: #f0f9ff;
+            border-radius: var(--radius-xl);
+            padding: 4rem;
+            margin-bottom: 6rem;
+            text-align: center;
+        }
+        .procedure-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            text-align: left;
+            margin-top: 3rem;
+        }
+        .proc-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .proc-box h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .proc-box h4 i { color: var(--primary); }
+        .proc-box p { color: var(--text-body); line-height: 1.6; }
+
+        /* Tabela de Manutenção (Cards de Pricing) */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        .pricing-card {
+            background: white;
+            padding: 2.5rem 1.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-card);
+        }
+        .pricing-card .badge {
+            background: rgba(2, 132, 199, 0.1);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+        .pricing-percentage {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+        .pricing-card p {
+            color: var(--text-body);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-top: 1rem;
+        }
+
+        .cta-final { text-align: center; padding: 5rem 2rem; background: var(--dark); border-radius: var(--radius-xl); margin-bottom: 4rem; }
+
+        /* ========================================================
+           OTIMIZAÇÃO MOBILE (GAP E LARGURA CORRIGIDOS)
+           ======================================================== */
+        @media (max-width: 768px) {
+            .container { padding: 0 2rem !important; }
+            .page-header { padding: 120px 1.5rem 40px; }
+            .page-header h1 { font-size: 2.2rem; line-height: 1.1; margin-bottom: 1rem; }
+            .page-header p { font-size: 1rem; }
+
+            /* BIO */
+            .bio-section {
+                flex-direction: column;
+                padding: 2rem 1.5rem;
+                gap: 2rem;
+                border-radius: 24px;
+                max-width: 420px;
+                margin: 0 auto 5rem;
+            }
+            .bio-image { flex: auto; width: 100%; }
+            .bio-content h2 { font-size: 1.7rem; }
+            .bio-content p { font-size: 1rem; }
+            .social-buttons { flex-direction: column; gap: 0.8rem; }
+            .social-buttons .btn { width: 100%; justify-content: center; }
+
+            /* PROCEDIMENTOS E PAGAMENTO */
+            .procedure-card { padding: 2rem 1.5rem; border-radius: 24px; }
+            .procedure-grid { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
+            .proc-box { padding: 1.5rem; }
+
+            /* PRECIFICAÇÃO */
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+                max-width: 360px;
+                margin: 2rem auto 0;
+            }
+            .pricing-card { padding: 2rem 1.5rem; }
+
+            .cta-final {
+                margin-top: 3rem; margin-bottom: 2rem; padding: 3rem 1.5rem;
+                border-radius: 24px; max-width: 420px; margin-left: auto; margin-right: auto;
+            }
+            .cta-final h2 { font-size: 1.6rem !important; line-height: 1.2; }
+            .cta-final p { font-size: 1rem !important; margin-bottom: 1.5rem !important; }
+            .cta-final .btn { width: 100%; padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-dock">
+        <div class="nav-links-group">
+            <a href="index.html#inicio" class="nav-item">
+                <i data-lucide="home" class="nav-icon"></i><span class="nav-text">Início</span>
+            </a>
+            <a href="solucoes.html" class="nav-item">
+                <i data-lucide="zap" class="nav-icon"></i><span class="nav-text">Soluções</span>
+            </a>
+            <a href="projetos.html" class="nav-item">
+                <i data-lucide="folder-open" class="nav-icon"></i><span class="nav-text">Projetos</span>
+            </a>
+            <a href="#" class="nav-item active">
+                <i data-lucide="user" class="nav-icon"></i><span class="nav-text">Sobre</span>
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-social-group">
+            <a href="https://github.com/KauaAlvs" target="_blank" class="nav-social"><i data-lucide="github"></i></a>
+            <a href="https://linkedin.com/in/kaua-alves-silva" target="_blank" class="nav-social"><i data-lucide="linkedin"></i></a>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container" data-aos="fade-up">
+            <h1>Por trás do código.</h1>
+            <p>Conheça minha trajetória, como estruturo meus projetos e a transparência no modelo de pagamento.</p>
+        </div>
+    </header>
+
+    <main class="section-padding container">
+
+        <section class="bio-section" data-aos="fade-up">
+            <div class="bio-image">
+                <img src="imagens/eu.png" alt="Kauã Alves">
+            </div>
+            <div class="bio-content">
+                <h2>Muito prazer, sou o Kauã.</h2>
+                <p>Tenho 21 anos e atuo profissionalmente como programador há 4 anos. Minha jornada não começou apenas "fazendo sites". Passei por praticamente todos os setores da Tecnologia da Informação: do suporte técnico e infraestrutura de redes aos fundamentos de Cloud e Desenvolvimento Full Stack.</p>
+                <p>Essa vivência completa me dá uma visão única: eu não crio apenas telas bonitas. Eu entendo como a tecnologia funciona por trás das cortinas e como ela pode ser usada para resolver <strong>problemas reais do seu negócio</strong>.</p>
+                <p>Minha grande paixão é o desenvolvimento de soluções robustas que atuam como um verdadeiro "braço direito" para empresas.</p>
+                
+                <div class="social-buttons">
+                    <a href="https://linkedin.com/in/kaua-alves-silva" target="_blank" class="btn btn-outline"><i data-lucide="linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/KauaAlvs" target="_blank" class="btn btn-outline"><i data-lucide="github"></i> GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="procedure-card" data-aos="fade-up">
+            <h2 style="font-size: 2.2rem; color: var(--dark); font-weight: 800; margin-bottom: 1rem;">Transparência do início ao fim.</h2>
+            <p style="color: var(--text-body); font-size: 1.1rem; max-width: 700px; margin: 0 auto;">Nada de letras miúdas. Trabalho com um modelo de negócios claro, focado em entregar exatamente o que você solicitou, com segurança para ambos os lados.</p>
+
+            <div class="procedure-grid">
+                <div class="proc-box" data-aos="fade-right">
+                    <h4><i data-lucide="wallet"></i> Pagamento do Projeto</h4>
+                    <p>Trabalho com um pagamento único para o desenvolvimento do seu projeto. A condição padrão para iniciar os trabalhos é de <strong>50% de entrada e 50% na entrega oficial</strong>. Também ofereço a opção de pagamento 100% antecipado (projetos não são iniciados sem a confirmação de entrada).</p>
+                </div>
+                <div class="proc-box" data-aos="fade-left">
+                    <h4><i data-lucide="check-square"></i> Entrega e Escopo</h4>
+                    <p>Seu site ou sistema será entregue rigorosamente da forma como foi solicitado no orçamento. Tudo é testado e validado por você antes da entrega final. Após o término, o projeto é 100% seu. Não cobro mensalidades ocultas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="margin-bottom: 6rem;">
+            <div style="text-align: center;" data-aos="fade-up">
+                <h2 style="font-size: 2.2rem; color: var(--dark); font-weight: 800; margin-bottom: 1rem;">E se eu quiser mudar algo depois?</h2>
+                <p style="color: var(--text-body); font-size: 1.1rem; max-width: 800px; margin: 0 auto;">Não cobro taxas mensais obrigatórias. Caso o cliente precise alterar, acrescentar ou retirar algo no sistema <strong>após a entrega final</strong>, cobro uma taxa sob demanda baseada na complexidade da alteração.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="badge">Nível 1</div>
+                    <h3 style="font-size: 1.3rem; color: var(--dark); margin-bottom: 1rem;">Alteração Simples</h3>
+                    <div class="pricing-percentage">10%</div>
+                    <div style="font-size: 0.9rem; color: var(--primary); font-weight: 700; margin-bottom: 1rem;">do valor do contrato</div>
+                    <p>Pequenos ajustes de texto, troca de imagens, mudança de cores ou pequenos alinhamentos de layout.</p>
+                </div>
+                
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="100" style="border-color: var(--primary); box-shadow: var(--shadow-card); transform: translateY(-10px);">
+                    <div class="badge" style="background: var(--primary); color: white;">Nível 2</div>
+                    <h3 style="font-size: 1.3rem; color: var(--dark); margin-bottom: 1rem;">Alteração Mediana</h3>
+                    <div class="pricing-percentage" style="color: var(--primary);">15%</div>
+                    <div style="font-size: 0.9rem; color: var(--primary); font-weight: 700; margin-bottom: 1rem;">do valor do contrato</div>
+                    <p>Adição de novas páginas simples, criação de novas seções de conteúdo ou ajustes estruturais de layout.</p>
+                </div>
+
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="badge" style="background: #f1f5f9; color: var(--text-body);">Nível 3</div>
+                    <h3 style="font-size: 1.3rem; color: var(--dark); margin-bottom: 1rem;">Alteração Complexa</h3>
+                    <div class="pricing-percentage">20%</div>
+                    <div style="font-size: 0.9rem; color: var(--primary); font-weight: 700; margin-bottom: 1rem;">do valor do contrato</div>
+                    <p>Criação de novas lógicas no sistema, integração com APIs externas, ou novas funcionalidades no banco de dados.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="cta-final" data-aos="zoom-in">
+            <h2 style="font-size: 2.2rem; margin-bottom: 1.5rem; color: white;">Pronto para termos uma parceria de sucesso?</h2>
+            <p style="font-size: 1.1rem; color: #cbd5e1; max-width: 600px; margin: 0 auto 2rem;">Entre em contato hoje. Me explique sua necessidade e eu montarei um orçamento sem compromisso.</p>
+            <a href="https://wa.me/5511985394101?text=Olá Kauã! Vi a sua página e gostaria de conversar sobre um projeto." class="btn" style="background: white; color: var(--dark);" target="_blank"><i data-lucide="message-circle"></i> Falar pelo WhatsApp</a>
+        </div>
+
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        lucide.createIcons();
+        AOS.init({ disable: window.innerWidth < 768 }); 
+    </script>
+</body>
+</html>

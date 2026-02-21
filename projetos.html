@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <meta name="robots" content="index, follow">
+    <title>Projetos e Cases de Sucesso | Kauã Alves</title>
+    <meta name="description" content="Conheça os projetos reais que desenvolvi para empresas: CRM Papa Mike, Portal APIT, Intranet Suplax, Lojas Virtuais e Landing Pages de alta conversão.">
+    
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%230284c7"/><text x="50" y="50" dy=".35em" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="70" fill="white">K</text></svg>'>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Estilos Exclusivos da Página de Projetos */
+        .page-header {
+            padding: 160px 1.5rem 80px;
+            background: linear-gradient(to bottom, #f0f9ff, var(--bg-body));
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--dark);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-body);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Layout Zigue-Zague dos Projetos */
+        .project-showcase {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            margin-bottom: 7rem;
+        }
+        .project-showcase.reverse {
+            flex-direction: row-reverse;
+        }
+        .project-image-wrapper {
+            flex: 1;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .project-image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .project-image-wrapper:hover img {
+            transform: scale(1.03);
+        }
+        .project-content {
+            flex: 1;
+        }
+        .project-tag {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: rgba(2, 132, 199, 0.1);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.2rem;
+        }
+        .project-content h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .project-content p {
+            color: var(--text-body);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .result-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+        .result-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        .result-list li:last-child { margin-bottom: 0; }
+        .result-list i { color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+
+        .cta-final { text-align: center; margin-top: 6rem; padding: 5rem 2rem; background: var(--dark); border-radius: var(--radius-xl); }
+
+        /* OTIMIZAÇÃO MOBILE PRESERVANDO MARGENS */
+        @media (max-width: 768px) {
+            .container { padding: 0 2rem !important; }
+            .page-header { padding: 120px 2rem 40px; }
+            .page-header h1 { font-size: 2.2rem; line-height: 1.1; margin-bottom: 1rem; }
+            .page-header p { font-size: 1rem; }
+
+            .project-showcase, .project-showcase.reverse {
+                flex-direction: column;
+                gap: 2rem;
+                margin-bottom: 5rem;
+                max-width: 420px; 
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .project-content { width: 100%; padding: 0 0.5rem; }
+            .project-tag { font-size: 0.75rem; padding: 0.3rem 1rem; margin-bottom: 1rem; }
+            .project-content h2 { font-size: 1.7rem; margin-bottom: 1rem; }
+            .project-content p { font-size: 1rem; margin-bottom: 1.5rem; }
+
+            .result-list { padding: 1.2rem; }
+            .result-list li { font-size: 0.95rem; }
+
+            .project-content .btn { width: 100%; padding: 1.2rem; font-size: 1.05rem; justify-content: center; }
+
+            .cta-final {
+                margin-top: 4rem; margin-bottom: 2rem; padding: 3rem 1.5rem;
+                border-radius: 24px; max-width: 420px; margin-left: auto; margin-right: auto;
+            }
+            .cta-final h2 { font-size: 1.6rem !important; line-height: 1.2; }
+            .cta-final p { font-size: 1rem !important; margin-bottom: 1.5rem !important; }
+            .cta-final .btn { width: 100%; padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-dock">
+        <div class="nav-links-group">
+            <a href="index.html#inicio" class="nav-item">
+                <i data-lucide="home" class="nav-icon"></i><span class="nav-text">Início</span>
+            </a>
+            <a href="solucoes.html" class="nav-item">
+                <i data-lucide="zap" class="nav-icon"></i><span class="nav-text">Soluções</span>
+            </a>
+            <a href="#" class="nav-item active">
+                <i data-lucide="folder-open" class="nav-icon"></i><span class="nav-text">Projetos</span>
+            </a>
+            <a href="sobre.html" class="nav-item">
+                <i data-lucide="user" class="nav-icon"></i><span class="nav-text">Sobre</span>
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-social-group">
+            <a href="https://github.com/KauaAlvs" target="_blank" class="nav-social"><i data-lucide="github"></i></a>
+            <a href="https://linkedin.com/in/kaua-alves-silva" target="_blank" class="nav-social"><i data-lucide="linkedin"></i></a>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container" data-aos="fade-up">
+            <h1>Onde a tecnologia<br>encontra o resultado.</h1>
+            <p>Deixando a complexidade de lado. Veja na prática como ajudei empresas reais a venderem mais, organizarem suas equipes e ganharem tempo.</p>
+        </div>
+    </header>
+
+    <main class="section-padding container">
+
+        <section class="project-showcase" data-aos="fade-up">
+            <div class="project-image-wrapper">
+                <img src="imagens/og-image-papamike.jpg" alt="Sistema CRM Papa Mike">
+            </div>
+            <div class="project-content">
+                <span class="project-tag">Gestão & Vendas</span>
+                <h2>Ecossistema Papa Mike</h2>
+                <p>O cliente precisava organizar uma operação complexa que envolvia muitas planilhas e comunicação espalhada. Desenvolvi um sistema completo que atua como o "coração da escola". Ele unifica o painel de matrículas, organiza a equipe comercial e simplifica o controle financeiro.</p>
+                <ul class="result-list">
+                    <li><i data-lucide="trending-up"></i> Fim das perdas de dados em planilhas manuais.</li>
+                    <li><i data-lucide="users"></i> Equipe de vendas focada em uma única tela.</li>
+                    <li><i data-lucide="pie-chart"></i> Relatórios financeiros gerados automaticamente.</li>
+                </ul>
+                <a href="https://papamike.com.br" class="btn btn-outline" target="_blank">Acessar Projeto <i data-lucide="external-link" style="width: 18px;"></i></a>
+            </div>
+        </section>
+
+        <section class="project-showcase reverse" data-aos="fade-up">
+            <div class="project-image-wrapper">
+                <img src="imagens/intranet.png" alt="Intranet Suplax" onerror="this.src='https://placehold.co/800x600/475569/FFF?text=Intranet+Corporativa'">
+            </div>
+            <div class="project-content">
+                <span class="project-tag">Comunicação Interna</span>
+                <h2>Intranet Suplax</h2>
+                <p>O foco deste projeto foi criar a "casa digital" do colaborador. Construí um portal interno restrito onde os funcionários têm acesso a tudo que precisam para o dia a dia da empresa, melhorando drasticamente a comunicação do RH e da T.I com a equipe.</p>
+                <ul class="result-list">
+                    <li><i data-lucide="coffee"></i> Mural de avisos e visualizador do cardápio diário.</li>
+                    <li><i data-lucide="file-text"></i> Central de solicitação de documentos diretamente ao RH.</li>
+                    <li><i data-lucide="wrench"></i> Abertura de chamados de T.I vinculados ao perfil do usuário.</li>
+                </ul>
+                <button class="btn btn-outline" style="cursor: not-allowed; opacity: 0.7;">🚫 Acesso Restrito (Uso Interno)</button>
+            </div>
+        </section>
+
+        <section class="project-showcase" data-aos="fade-up">
+            <div class="project-image-wrapper">
+                <img src="imagens/apitmenor.png" alt="Portal APIT Jovem Aprendiz">
+            </div>
+            <div class="project-content">
+                <span class="project-tag">Portal Web</span>
+                <h2>Portal APIT (Jovem Aprendiz)</h2>
+                <p>Uma ponte digital entre talentos e empresas. O desafio era criar uma plataforma ágil e intuitiva onde jovens pudessem cadastrar seus currículos facilmente e, do outro lado, empresas parceiras pudessem divulgar vagas e encontrar o candidato ideal.</p>
+                <ul class="result-list">
+                    <li><i data-lucide="search"></i> Facilidade para jovens criarem e enviarem currículos.</li>
+                    <li><i data-lucide="briefcase"></i> Gestão simples de vagas para os recrutadores.</li>
+                    <li><i data-lucide="zap"></i> Design limpo e carregamento super rápido.</li>
+                </ul>
+                <a href="https://apitaprendiz.org.br" class="btn btn-outline" target="_blank">Acessar Projeto <i data-lucide="external-link" style="width: 18px;"></i></a>
+            </div>
+        </section>
+
+        <section class="project-showcase reverse" data-aos="fade-up">
+            <div class="project-image-wrapper">
+                <img src="imagens/menorecommerce.png" alt="Projeto E-commerce">
+            </div>
+            <div class="project-content">
+                <span class="project-tag">Vendas Online</span>
+                <h2>Lojas Virtuais & E-commerce</h2>
+                <p>Criação de lojas virtuais que funcionam como máquinas de vendas 24h por dia. Todo o ambiente é construído para passar segurança ao comprador, com integrações automáticas que facilitam a vida do lojista.</p>
+                <ul class="result-list">
+                    <li><i data-lucide="credit-card"></i> Pagamento seguro via Mercado Pago (PIX, Cartão, Boleto).</li>
+                    <li><i data-lucide="shopping-cart"></i> Carrinho de compras intuitivo e fácil de usar.</li>
+                    <li><i data-lucide="box"></i> Painel administrativo para gerenciar estoque e novos produtos.</li>
+                </ul>
+                <a href="https://loja-futuro.vercel.app/" class="btn btn-outline" target="_blank">Ver Loja de Exemplo <i data-lucide="external-link" style="width: 18px;"></i></a>
+            </div>
+        </section>
+
+        <section class="project-showcase" data-aos="fade-up">
+            <div class="project-image-wrapper">
+                <img src="imagens/saudemenor.png" alt="Landing Pages e Sites">
+            </div>
+            <div class="project-content">
+                <span class="project-tag">Alta Conversão</span>
+                <h2>Landing Pages e Sites (Papa Mike)</h2>
+                <p>Um site não pode ser apenas bonito, ele precisa gerar resultados. Construo páginas focadas 100% em captar contatos ou vender serviços. Exemplos como "Papa Mike Saúde" e "Matrículas Kids" foram desenhados para guiar o olhar do cliente diretamente para a ação (compra ou cadastro).</p>
+                <ul class="result-list">
+                    <li><i data-lucide="mouse-pointer-click"></i> Botões estratégicos e chamadas para ação (CTAs) claras.</li>
+                    <li><i data-lucide="smartphone"></i> Adaptação perfeita para visualização em celulares.</li>
+                    <li><i data-lucide="globe"></i> Preparado para campanhas de anúncios (Google Ads, Facebook).</li>
+                </ul>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="https://papamikesaude.com.br" class="btn btn-outline" target="_blank">Ver Projeto Saúde</a>
+                    <a href="https://lpkids.papamike.com.br" class="btn btn-outline" target="_blank">Ver Projeto Kids</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="cta-final" data-aos="zoom-in">
+            <h2 style="font-size: 2.2rem; margin-bottom: 1.5rem; color: white;">Viu como posso ajudar seu negócio?</h2>
+            <p style="font-size: 1.1rem; color: #cbd5e1; max-width: 600px; margin: 0 auto 2rem;">Se você tem um problema na sua empresa, provavelmente existe uma solução digital para resolvê-lo. Vamos bater um papo sem compromisso.</p>
+            <a href="https://wa.me/5511985394101?text=Olá Kauã! Vi seus projetos e gostaria de conversar sobre uma ideia." class="btn" style="background: white; color: var(--dark);" target="_blank"><i data-lucide="message-circle"></i> Iniciar Meu Projeto</a>
+        </div>
+
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        lucide.createIcons();
+        AOS.init({ disable: window.innerWidth < 768 }); 
+    </script>
+</body>
+</html>
