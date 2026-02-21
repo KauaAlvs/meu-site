@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <meta name="robots" content="index, follow">
+    <title>Contato | Kauã Alves</title>
+    <meta name="description" content="Entre em contato com Kauã Alves para solicitar um orçamento de criação de site, sistema web ou intranet.">
+    
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%230284c7"/><text x="50" y="50" dy=".35em" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="70" fill="white">K</text></svg>'>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ========================================================
+           ESTILOS EXCLUSIVOS DA PÁGINA DE CONTATO
+           ======================================================== */
+        .page-header {
+            padding: 160px 1.5rem 60px;
+            background: linear-gradient(to bottom, #f0f9ff, var(--bg-body));
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--dark);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-body);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: start;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Lado Esquerdo: Cards de Informação */
+        .contact-info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-card);
+            border-color: var(--primary);
+        }
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: #f0f9ff;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .info-text h3 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+        }
+        .info-text p {
+            color: var(--text-body);
+            font-size: 0.95rem;
+        }
+
+        /* Lado Direito: Formulário Smart */
+        .contact-form-box {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .contact-form-box h2 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            font-weight: 800;
+        }
+        
+        .form-group { margin-bottom: 1.5rem; text-align: left; }
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+            font-family: inherit;
+            background: var(--bg-body);
+        }
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .form-input:focus, .form-textarea:focus {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1);
+        }
+
+        /* ========================================================
+           OTIMIZAÇÃO MOBILE EXTREMA
+           ======================================================== */
+        @media (max-width: 768px) {
+            .page-header { padding: 120px 1.5rem 30px; }
+            .page-header h1 { font-size: 2.2rem; line-height: 1.1; margin-bottom: 1rem; }
+            .page-header p { font-size: 1rem; }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                max-width: 420px;
+                margin: 0 auto;
+            }
+
+            .contact-form-box {
+                padding: 2rem 1.5rem;
+                border-radius: 24px;
+            }
+            .contact-form-box h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+            
+            .info-card { padding: 1.5rem; gap: 1rem; border-radius: 20px;}
+            .info-icon { width: 50px; height: 50px; }
+            .info-text h3 { font-size: 1.1rem; }
+            .info-text p { font-size: 0.9rem; }
+            
+            .form-input, .form-textarea { padding: 1rem 1.2rem; }
+            .btn-submit { width: 100%; padding: 1.2rem; font-size: 1.05rem; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-dock">
+        <div class="nav-links-group">
+            <a href="index.html#inicio" class="nav-item">
+                <i data-lucide="home" class="nav-icon"></i><span class="nav-text">Início</span>
+            </a>
+            <a href="solucoes.html" class="nav-item">
+                <i data-lucide="zap" class="nav-icon"></i><span class="nav-text">Soluções</span>
+            </a>
+            <a href="projetos.html" class="nav-item">
+                <i data-lucide="folder-open" class="nav-icon"></i><span class="nav-text">Projetos</span>
+            </a>
+            <a href="sobre.html" class="nav-item">
+                <i data-lucide="user" class="nav-icon"></i><span class="nav-text">Sobre</span>
+            </a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-social-group">
+            <a href="https://github.com/KauaAlvs" target="_blank" class="nav-social"><i data-lucide="github"></i></a>
+            <a href="https://linkedin.com/in/kaua-alves-silva" target="_blank" class="nav-social"><i data-lucide="linkedin"></i></a>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container" data-aos="fade-up">
+            <h1>Vamos iniciar<br>o seu projeto?</h1>
+            <p>Seja para tirar uma dúvida, solicitar um orçamento ou estruturar uma nova ideia, estou à disposição.</p>
+        </div>
+    </header>
+
+    <main class="section-padding container" style="padding-top: 2rem;">
+        <div class="contact-wrapper">
+            
+            <div class="contact-info-cards" data-aos="fade-right">
+                <a href="https://wa.me/5511976965693" target="_blank" class="info-card">
+                    <div class="info-icon"><i data-lucide="message-circle" size="28"></i></div>
+                    <div class="info-text">
+                        <h3>WhatsApp</h3>
+                        <p>+55 (11) 98539-4101</p>
+                    </div>
+                </a>
+
+                <a href="mailto:kauak4006@gmail.com" class="info-card">
+                    <div class="info-icon"><i data-lucide="mail" size="28"></i></div>
+                    <div class="info-text">
+                        <h3>E-mail Oficial</h3>
+                        <p>kauak4006@gmail.com</p>
+                    </div>
+                </a>
+
+                <a href="https://linkedin.com/in/kaua-alves-silva" target="_blank" class="info-card">
+                    <div class="info-icon"><i data-lucide="linkedin" size="28"></i></div>
+                    <div class="info-text">
+                        <h3>LinkedIn</h3>
+                        <p>Conecte-se comigo</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="contact-form-box" data-aos="fade-left">
+                <h2>Envie uma mensagem rápida</h2>
+                
+                <div class="form-group">
+                    <label for="nomeForm">Seu Nome / Empresa</label>
+                    <input type="text" id="nomeForm" class="form-input" placeholder="Ex: João da Silva">
+                </div>
+
+                <div class="form-group">
+                    <label for="assuntoForm">Qual é o assunto?</label>
+                    <select id="assuntoForm" class="form-input" style="cursor: pointer; appearance: none;">
+                        <option value="Orçamento para Site">Orçamento para Site</option>
+                        <option value="Orçamento para Sistema/Intranet">Orçamento para Sistema/Intranet</option>
+                        <option value="Orçamento para Loja Virtual">Orçamento para Loja Virtual</option>
+                        <option value="Dúvida Geral">Apenas uma Dúvida</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="mensagemForm">Como posso te ajudar?</label>
+                    <textarea id="mensagemForm" class="form-textarea" placeholder="Explique resumidamente sua ideia ou necessidade..."></textarea>
+                </div>
+
+                <button onclick="enviarFormulario()" class="btn btn-primary btn-submit" style="width: 100%;">
+                    Enviar pelo WhatsApp <i data-lucide="send" style="width: 18px;"></i>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        lucide.createIcons();
+        AOS.init({ disable: window.innerWidth < 768 }); 
+
+        function enviarFormulario() {
+            const nome = document.getElementById('nomeForm').value.trim();
+            const assunto = document.getElementById('assuntoForm').value;
+            const mensagem = document.getElementById('mensagemForm').value.trim();
+
+            if (!nome || !mensagem) {
+                Swal.fire({
+                    title: 'Ops!',
+                    text: 'Por favor, preencha seu nome e a mensagem para continuarmos.',
+                    icon: 'warning',
+                    confirmButtonColor: '#0284c7'
+                });
+                return;
+            }
+
+            // Formatação bonita para o WhatsApp
+            const textoFormatado = `Olá Kauã! Me chamo *${nome}*.\n\n*Assunto:* ${assunto}\n\n*Mensagem:* ${mensagem}`;
+            const numeroTelefone = '5511976965693';
+            const linkWhatsApp = `https://wa.me/${numeroTelefone}?text=${encodeURIComponent(textoFormatado)}`;
+
+            // Abre o WhatsApp
+            window.open(linkWhatsApp, '_blank');
+            
+            // Limpa o formulário após 1 segundo
+            setTimeout(() => {
+                document.getElementById('nomeForm').value = '';
+                document.getElementById('mensagemForm').value = '';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
