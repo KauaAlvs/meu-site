@@ -45,5 +45,5 @@ Apesar de ser uma aplicação puramente front-end (Estática), o projeto está h
 
 Se você é um tech recruiter, fundador de startup procurando um desenvolvedor Full Stack, ou um colega dev explorando repositórios, adoraria trocar uma ideia sobre arquitetura web, negócios ou novas oportunidades!
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/SEU_LINKEDIN/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kaua-alves-silva/)
 [![Portfólio](https://img.shields.io/badge/Acessar_Site-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://site-kaua.vercel.app/)
